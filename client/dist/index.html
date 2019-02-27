@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<header>
+  <link rel='stylesheet' href='styles.css'>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/styled-components@4.1.3/dist/styled-components.min.js"></script>
+</header>
+
+<body>
+
+  <div class='container'>
+    <div class='right' id='app'></div>
+  </div>
+  <script src="./bundle.js"></script>
+  <script>
+    ReactDOM.render(
+      React.createElement(AgentContact, { houseId: window.location.pathname.slice(1) }),
+      document.getElementById('app')
+    );
+  </script>
+</body>
+
+</html>
