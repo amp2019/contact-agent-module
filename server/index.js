@@ -74,17 +74,7 @@ app.post('/newAgent', (req,res) => {
   });
 })
 
-//read
-app.get('/agent', (req,res) => {
-  db.getAgent(req.body, (err) => {
-    if(err) {
-      console.log(err)
-      res.status(409).send(err);
-    } else {
-      res.status(201).send('success');
-    }
-  });
-})
+//read - see above
 
 //update
 //**MAKE THE CURL COMMAND!!! 

@@ -9,21 +9,25 @@
 
 
 # API References 
-*OPERATION (endpoint) [required fields] {other fields}*
-  -*example command 1*
-  -*example command 2*
+OPERATION (endpoint) [required fields] {other fields}
+  - example command 1
+  - example command 2
+
 CREATE (/newAgent) [name] {houseId, company, phone, url}
-  - `curl -d '{"houseId":"150", "name":"Luke Lucas", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent`
-  - `curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent`
+  - ``curl -d '{"houseId":"150", "name":"Luke Lucas", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent``
+  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent``
+
 READ (/:houseId) [name] {}
-  -`curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X GET http://localhost:8082/agent`
-  -example command 2
+  -``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent``
+  -``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent``
+
 UPDATE (/updateAgent) [name] {houseId, company, phone, url}
-  - `curl -d '{"houseId":"151", "name":"Luke Lucas", "company":"NASA", "phone":"(555) 555-8844", "url":"www.spacex.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent`
-  - `curl -d '{"name":"Raaandy", "houseId":"151"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent`
+  - ``curl -d '{"houseId":"151", "name":"Luke Lucas", "company":"NASA", "phone":"(555) 555-8844", "url":"www.spacex.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent``
+  - ``curl -d '{"name":"Raaandy", "houseId":"151"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent``
+
 DELETE (/deleteAgent) [name] {}
-  - `curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent`
-  - `curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent`
+  - ``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent``
+  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent``
 
 
 # INSTRUCTIONS TO SETUP RUNNING INSTANCE
