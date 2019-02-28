@@ -2,14 +2,9 @@
 
 const faker = require('faker');
 const mysql = require('mysql');
+const mysqlConfig = require('./config.js');
 
-
-const connection = mysql.createConnection({
-  //host: '',
-  user: 'your username',
-  password: 'your password',
-  database: 'agents'
-});
+const connection = mysql.createConnection(mysqlConfig);
 
 connection.connect();
 
@@ -68,7 +63,7 @@ const createData = () => {
   CREATE TABLE listedAgent (
     id INT AUTO_INCREMENT,
     houseId INT,
-    name VARCHAR(100),
+    name VARCHAR(100) UNIQUE NOT NULL,
     company VARCHAR(100),
     reviews INT,
     recentSales INT,

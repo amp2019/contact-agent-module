@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest || true",
     "dev-pack": "webpack --watch",
-    "start": "node ./server/index.js",
+    "start": "nodemon ./server/index.js",
     "seed": "mysql -u root -p < data/schema.sql",
     "faker": "node ./data/fakeData.js"
   },

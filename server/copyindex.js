@@ -4,10 +4,7 @@ const path = require('path');
 const db = require('../data/db.js');
 
 const app = express();
-
-// const PORT = process.env.PORT || 8083;
-const PORT = 8083;
-//figure out why packets dropping on 8082
+const PORT = process.env.PORT || 8082;
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.json());
@@ -17,19 +14,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-//this .get has to stay above the 
-//curl -d '{"name":"Monroe Walsh"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent
-app.get('/agent', (req,res) => {
-  db.getAgent(req.body, (err,data) => {
-    if(err) {
-      console.log(err)
-      res.status(401).send(err);
-    } else {
-      res.status(201).send(data);
-    }
-  });
-})
-
 // renders new html for unique house data
 app.get('/:houseId', (req, res) => {
   // let houseId = req.params.houseId;
@@ -38,11 +22,16 @@ app.get('/:houseId', (req, res) => {
 });
 
 app.get('/houseId/listedAgent/:houseId', (req, res) => {
-  let houseId = req.params.houseId;
+  let houseId = req.params.houseId
+  // let houseId = 99
+  // if(req.params.houseId) {
+  //   houseId = req.params.houseId
+  // }
   db.getListedAgent(houseId, (err, data) => {
     if (err) {
       res.sendStatus(404);
     } else {
+      console.log('server index sent data back')
       res.status(200).send(data);
     }
   });
@@ -58,11 +47,12 @@ app.get('/houseId/premierAgents', (req, res) => {
   });
 });
 
+
 //crud
 
 //create
-//curl -d '{"houseId":"150", "name":"Chaaandy", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
-//curl -d '{"name":"Monroe Walsh", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
+//curl -d '{"houseId":"150", "name":"Raaandy", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8082/newAgent
+//curl -d '{"name":"Monroe Walsh", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8082/newAgent
 app.post('/newAgent', (req,res) => {
   db.createAgent(req.body, (err) => {
     if(err) {
@@ -88,7 +78,7 @@ app.get('/agent', (req,res) => {
 
 //update
 //**MAKE THE CURL COMMAND!!! 
-//curl -d '{"houseId":"153", "name":"Raaandy", "company":"Hack Reactor", "phone":"(555) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent
+//curl -d '{"houseId":"153", "name":"Raaandy", "company":"Hack Reactor", "phone":"(555) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent
 
 
 app.patch('/updateAgent', (req,res) => {  
@@ -102,7 +92,7 @@ app.patch('/updateAgent', (req,res) => {
 })
 
 //delete
-//curl -d '{"houseId":"149"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent
+//curl -d '{"houseId":"149"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent
 
 
 app.delete('/deleteAgent', (req,res) => {

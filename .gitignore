@@ -25,7 +25,7 @@ node_modules/
 jspm_packages/
 
 # Passwords
-data/fakeData.js
+data/config.js
 
 # Optional npm cache directory
 .npm

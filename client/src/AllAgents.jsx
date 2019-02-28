@@ -19,15 +19,17 @@ class AllAgents extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get(`http://steve.us-east-2.elasticbeanstalk.com/houseId/listedAgent/${this.props.houseId}`)
+    let homeId = 99
+    if (this.props.houseId) {
+      homeId = this.props.houseId;
+    }
+    console.log(this.props.houseId)
+    axios.get(`/houseId/listedAgent/${homeId}`)
       .then(response => {
-
-        // response is of type string
-        // [{"id":101,"house_id":100,"agent_name":"Arch Weber","agitgent_company":"Bechtelar, Gislason and Schuppe","agent_phone":"(236) 089-1945 x509","agent_url":"http://lorempixel.com/640/480/people
         const listAgent = response.data[0];
         this.setState({ lAgent: listAgent });
       });
-    axios.get(`http://steve.us-east-2.elasticbeanstalk.com/houseId/premierAgents`)
+    axios.get(`/houseId/premierAgents`)
       .then(response => {
         const preAgent0 = response.data[0];
         const preAgent1 = response.data[1];

@@ -39,7 +39,7 @@ class Form extends React.Component {
       message: this.state.information.message,
     }
     alert('data collected and submitted: ' + data);
-    console.log(data);
+    //console.log(data);
     //post request here:
     //saveClientInfo(data);
   };
