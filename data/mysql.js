@@ -1,14 +1,7 @@
 const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
-//const pg = require('pg') npm install pg
-//const mongo??? = require('mongo') npm install mongo
+const config = require('./config.js');
 
-const connection = mysql.createConnection(mysqlConfig);
-
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
+const connection = mysql.createConnection(config.mysqlConfig);
 connection.connect();
 
 const getListedAgent = (houseId, callback) => {
@@ -16,10 +9,13 @@ const getListedAgent = (houseId, callback) => {
     if (err) {
       console.log('RECEIVING LIST AGENT FAILED', err);
     } else {
-      //console.log(data)
       callback(err, data);
     }
   });
+};
+
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const getPremierAgents = (callback) => {
@@ -88,7 +84,6 @@ const updateAgent = (data, cb) => {
 
 const deleteAgent = (data, cb) => {
   let qString = ''
-  console.log('db data',data)
   if(data.houseId) {
     qString = `DELETE FROM listedAgent WHERE houseId = ${data.houseId};`;
   }

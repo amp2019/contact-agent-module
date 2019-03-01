@@ -11,6 +11,7 @@
 # API References 
 
 *formatting example*
+
 OPERATION (endpoint) [required fields] {other fields}
   - example command 1
   - example command 2
@@ -24,12 +25,12 @@ READ (/:houseId) [name] {}
   - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent``
 
 UPDATE (/updateAgent) [name] {houseId, company, phone, url}
-  - ``curl -d '{"houseId":"151", "name":"Luke Lucas", "company":"NASA", "phone":"(555) 555-8844", "url":"www.spacex.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent``
-  - ``curl -d '{"name":"Raaandy", "houseId":"151"}' -H "Content-Type: application/json" -X PATCH http://localhost:8082/updateAgent``
+  - ``curl -d '{"houseId":"151", "name":"Luke Lucas", "company":"NASA", "phone":"(555) 555-8844", "url":"www.spacex.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent``
+  - ``curl -d '{"name":"Raaandy", "houseId":"151"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent``
 
 DELETE (/deleteAgent) [name] {}
-  - ``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent``
-  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X DELETE http://localhost:8082/deleteAgent``
+  - ``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent``
+  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent``
 
 
 # INSTRUCTIONS TO SETUP RUNNING INSTANCE

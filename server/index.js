@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../data/db.js');
+const dbmysql = require('../data/mysql.js');
+//ERROR POSSIBLE! Running mysql and pgsql at same time
+const dbpgsql = require('../data/pgsql.js');
+//const pg = require('./pgRoutes.js'); //need npm install router
+
 
 const app = express();
 
 // const PORT = process.env.PORT || 8083;
 const PORT = 8083;
-//figure out why packets dropping on 8082
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.json());
@@ -17,10 +20,96 @@ app.use(function (req, res, next) {
   next();
 });
 
+// need router app.get('/wut', pg.gethouse)
+app.get('/api/:houseId', (req,res) => {
+  let houseId = 1;
+  if (req.params.houseId) {
+    houseId = req.params.houseId;
+    console.log('params', houseId)
+  }
+  if (req.body.houseId) {
+    houseId = req.body.houseId;
+    console.log('body', houseId)
+  }
+  console.log('getHouse hit in pgRoutes')
+  dbpgsql.getAHomePgsql(houseId, (err,data) => {
+    if(err) {
+      console.log(err)
+      res.status(401).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+})
+
+app.post('/api/:houseId', (req,res) => {
+  let houseId = 1;
+  if (req.params.houseId) {
+    houseId = req.params.houseId;
+    console.log('post params', houseId)
+  }
+  if (req.body.houseId) {
+    houseId = req.body.houseId;
+    console.log('post body', houseId)
+  }
+  console.log('getHouse hit in pgRoutes')
+  dbpgsql.newNote(houseId, req.body, (err,data) => {
+    if(err) {
+      console.log(err)
+      res.status(401).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+})
+
+app.patch('/api/:houseId', (req,res) => {
+  let houseId = 1;
+  if (req.params.houseId) {
+    houseId = req.params.houseId;
+    console.log('post params', houseId)
+  }
+  if (req.body.houseId) {
+    houseId = req.body.houseId;
+    console.log('post body', houseId)
+  }
+  console.log('getHouse hit in pgRoutes')
+  dbpgsql.updateHome(houseId, req.body, (err,data) => {
+    if(err) {
+      console.log(err)
+      res.status(401).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+})
+
+app.delete('/api/:houseId', (req,res) => {
+  let houseId = 1;
+  if (req.params.houseId) {
+    houseId = req.params.houseId;
+    console.log('post params', houseId)
+  }
+  if (req.body.houseId) {
+    houseId = req.body.houseId;
+    console.log('post body', houseId)
+  }
+  console.log('getHouse hit in pgRoutes')
+  dbpgsql.deleteHome(houseId, (err,data) => {
+    if(err) {
+      console.log(err)
+      res.status(401).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+})
+
+
 //this .get has to stay above the 
 //curl -d '{"name":"Monroe Walsh"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent
 app.get('/agent', (req,res) => {
-  db.getAgent(req.body, (err,data) => {
+  dbmysql.getAgent(req.body, (err,data) => {
     if(err) {
       console.log(err)
       res.status(401).send(err);
@@ -39,7 +128,7 @@ app.get('/:houseId', (req, res) => {
 
 app.get('/houseId/listedAgent/:houseId', (req, res) => {
   let houseId = req.params.houseId;
-  db.getListedAgent(houseId, (err, data) => {
+  dbmysql.getListedAgent(houseId, (err, data) => {
     if (err) {
       res.sendStatus(404);
     } else {
@@ -49,7 +138,7 @@ app.get('/houseId/listedAgent/:houseId', (req, res) => {
 });
 
 app.get('/houseId/premierAgents', (req, res) => {
-  db.getPremierAgents((err, data) => {
+  dbmysql.getPremierAgents((err, data) => {
     if (err) {
       res.sendStatus(404);
     } else {
@@ -64,7 +153,7 @@ app.get('/houseId/premierAgents', (req, res) => {
 //curl -d '{"houseId":"150", "name":"Chaaandy", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
 //curl -d '{"name":"Monroe Walsh", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
 app.post('/newAgent', (req,res) => {
-  db.createAgent(req.body, (err) => {
+  dbmysql.createAgent(req.body, (err) => {
     if(err) {
       console.log(err)
       res.status(409).send(err);
@@ -82,7 +171,7 @@ app.post('/newAgent', (req,res) => {
 
 
 app.patch('/updateAgent', (req,res) => {  
-  db.updateAgent(req.body, (err) => {
+  dbmysql.updateAgent(req.body, (err) => {
     if(err) {
       res.status(404).send(err);
     } else {
@@ -96,7 +185,7 @@ app.patch('/updateAgent', (req,res) => {
 
 
 app.delete('/deleteAgent', (req,res) => {
-  db.deleteAgent(req.body, (err) => {
+  dbmysql.deleteAgent(req.body, (err) => {
     if(err) {
       res.status(404).send(err);
     } else {

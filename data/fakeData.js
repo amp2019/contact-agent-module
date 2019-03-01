@@ -2,9 +2,9 @@
 
 const faker = require('faker');
 const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
+const config = require('./config.js');
 
-const connection = mysql.createConnection(mysqlConfig);
+const connection = mysql.createConnection(config.mysqlConfig);
 
 connection.connect();
 
