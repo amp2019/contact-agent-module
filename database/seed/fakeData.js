@@ -1,8 +1,9 @@
+//FEC FILE
 //figure out how to end the program running
 
 const faker = require('faker');
 const mysql = require('mysql');
-const config = require('./config.js');
+const config = require('../config.js');
 
 const connection = mysql.createConnection(config.mysqlConfig);
 

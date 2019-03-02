@@ -30,8 +30,8 @@ data/config.js
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
-.eslintcache
-
 # dotenv environment variables file
 .env
+
+# datafiles / csv's
+database/seed/csv/

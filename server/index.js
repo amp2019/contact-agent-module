@@ -4,10 +4,12 @@ const path = require('path');
 const dbmysql = require('../data/mysql.js');
 //ERROR POSSIBLE! Running mysql and pgsql at same time
 const dbpgsql = require('../data/pgsql.js');
+const seed = require('../data/createDataFile.js')
 //const pg = require('./pgRoutes.js'); //need npm install router
 
 
 const app = express();
+//seed.seeder(1000000); //200,000
 
 // const PORT = process.env.PORT || 8083;
 const PORT = 8083;
