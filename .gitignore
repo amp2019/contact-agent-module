@@ -34,4 +34,4 @@ data/config.js
 .env
 
 # datafiles / csv's
-database/seed/csv/
+database/seed/datafiles/
