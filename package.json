@@ -7,8 +7,9 @@
     "test": "jest || true",
     "dev-pack": "webpack --watch",
     "start": "nodemon ./server/index.js",
-    "seedCsvs": "node database/seed/createDataFile.js",
-    "seedMongo": "mongo",
+    "seedCsvs": "node database/seed/createSqldata.js",
+    "seedJson": "node database/seed/createMongodata.js",
+    "seedMongo": "--db myCollection --collection newNew --jsonArray < database/seed/datafiles/mongoHomes.JSON",
     "seedPsql": "psql postgres < database/seed/psqlSeed.sql",
     "faker": "node ./database/fakeData.js"
   },
