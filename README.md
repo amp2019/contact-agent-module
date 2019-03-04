@@ -50,15 +50,20 @@ DELETE (/deleteAgent) [name] {}
 NOTES for postgres routes
 
 --KEEP IT SIMPLE (consider form on page first)
--- 1. GET: By homeId, return home address and listed agent 
-        -- select * from homes,agents where homes.id={homeId} AND agents.id=homes.agent;
--- 1.2 maybe GET by address as well
--- 1.3 maybe GET ALL addresses as well
--- 1.4 maybe GET random premium agents listed as well
+-- 1. GET: By homeId, return home address and listedAgent
+        -- POSTGRES: select * from homes,agents where homes.id={homeId} AND agents.id=homes.agent;
+        -- MONGO: 
+-- 1.1 GET: 3 random agents, with at least 5 sales
+-- 1.2 GET: By homeId, messages
+
 -- 2. POST: By homeId, a new message
-        -- insert into messages (home,name,phone,email,note) values ('')
--- 2.1. maybe POST, by adress, a new home
+        -- POSTGRES: insert into messages (home,name,phone,email,note) values ('');
+        -- MONGO:
+-- 2.1 POST: New homeId and address and (optional agent)
+
 -- 3. UPDATE: By homeId, a different listed agent id and/or address 
-        -- update homes set agent=2,address='252 lunch rd' where id=1
--- 4. DELETE a home
-        -- delete from homes where id=4
+        -- POSTGRES: update homes set agent=2,address='252 lunch rd' where id=1
+        -- MONGO: 
+
+-- 4. DELETE: a home
+        -- POSTGRES: delete from homes where id=4
