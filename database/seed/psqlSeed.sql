@@ -1,5 +1,5 @@
-DROP DATABASE HeyAgent;
-CREATE DATABASE HeyAgent;
+DROP DATABASE heyagent;
+CREATE DATABASE heyagent;
 \connect heyagent;
 
 CREATE TABLE agents (
@@ -23,7 +23,7 @@ CREATE TABLE homes (
 );
 
 CREATE TABLE messages (
-  id INT,
+  id INT serial,
   home INT,
   name VARCHAR(50),
   phone VARCHAR(15),
