@@ -40,7 +40,8 @@ The following table defines the properties used with the API
 OPERATION (endpoint) [required fields] {other fields}
 
   - `example command`
-    - ```
+
+    ```
     example response
     ```
 
@@ -49,34 +50,38 @@ OPERATION (endpoint) [required fields] {other fields}
 CREATE (/api) [houseId] {username, email, phone, note}
 
   - `curl -d '{"houseId":"150", "username":"Luke Lucas", "email":"hey@hey.com", "phone":"(484) 484-8844", "note":"I like the house. Can we talk?"}' -H "Content-Type: application/json" -X POST http://localhost:8083/api`
-    - ```
-    success!
-    ```
+
+```
+success!
+```
 
 ### Get address and agent information for a listed house
 
 READ (/api) [houseId] {}
 
   - `curl -d '{"houseId":"150"}' -H "Content-Type: application/json" -X GET http://localhost:8083/api`
-    - ```
-    [{"id":150,"address":"503 Dane Points","agent":4911,"name":"Retta Larson","premier":false,"company":"Conroy, Abernathy and Murray","imgurl":"https://s3.amazonaws.com/uifaces/faces/twitter/felipeapiress/128.jpg"}]
-    ```
+    
+```
+[{"id":150,"address":"503 Dane Points","agent":4911,"name":"Retta Larson","premier":false,"company":"Conroy, Abernathy and Murray","imgurl":"https://s3.amazonaws.com/uifaces/faces/twitter/felipeapiress/128.jpg"}]
+```
 
 ### Update the agent for a house listing
 
 UPDATE (/api) [houseId,agentId] {}
 
   - `curl -d '{"houseId":"151", "agentId":"5"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/api`
-    - ```
-    success!
-    ```
+    
+```
+success!
+```
 
 #### DELETE (/api) [houseId] {}
 
   - `curl -d '{"houseId":"151"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/api`
-    - ```
-    success!
-    ```
+    
+```
+success!
+```
 
 # INSTRUCTIONS TO SETUP RUNNING INSTANCE
 
