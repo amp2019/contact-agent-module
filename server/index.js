@@ -1,18 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const dbmysql = require('../data/mysql.js');
+const dbmysql = require('../database/mysql.js');
 //ERROR POSSIBLE! Running mysql and pgsql at same time
-const dbpgsql = require('../data/pgsql.js');
-const seed = require('../data/createDataFile.js')
+const dbpgsql = require('../database/pgsql.js');
+//const seed = require('../database/createDataFile.js')
 //const pg = require('./pgRoutes.js'); //need npm install router
 
 
 const app = express();
-//seed.seeder(1000000); //200,000
 
-// const PORT = process.env.PORT || 8083;
-const PORT = 8083;
+const PORT = process.env.PORT || 8083;
+//const PORT = 8083;
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(bodyParser.json());
@@ -22,8 +21,14 @@ app.use(function (req, res, next) {
   next();
 });
 
-// need router app.get('/wut', pg.gethouse)
-app.get('/api/:houseId', (req,res) => {
+
+//THIS IS WHERE MAIN API ROUTES START
+//need to change handlers to make sure they're getting and sending correct data for new api abilities
+//need to add and import functions for mongodb. 
+
+// to receive houseId, send houseId to db, and respond with house address and associated listedAgent info and 3 premier agents
+//app.get('/api/:houseId', (req,res) => {
+app.get('/api', (req,res) => {
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -44,7 +49,9 @@ app.get('/api/:houseId', (req,res) => {
   });
 })
 
-app.post('/api/:houseId', (req,res) => {
+//create a new message - need houseId, username, email, phone, message
+//app.post('/api/:houseId', (req,res) => {
+app.post('/api', (req,res) => {
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -60,12 +67,13 @@ app.post('/api/:houseId', (req,res) => {
       console.log(err)
       res.status(401).send(err);
     } else {
-      res.status(201).send(data);
+      res.status(201).send('success!');
     }
   });
 })
 
-app.patch('/api/:houseId', (req,res) => {
+//app.patch('/api/:houseId', (req,res) => {
+app.patch('/api', (req,res) => {
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -81,12 +89,13 @@ app.patch('/api/:houseId', (req,res) => {
       console.log(err)
       res.status(401).send(err);
     } else {
-      res.status(201).send(data);
+      res.status(201).send('success!');
     }
   });
 })
 
-app.delete('/api/:houseId', (req,res) => {
+// app.delete('/api/:houseId', (req,res) => {
+app.delete('/api', (req,res) => {
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -99,10 +108,10 @@ app.delete('/api/:houseId', (req,res) => {
   console.log('getHouse hit in pgRoutes')
   dbpgsql.deleteHome(houseId, (err,data) => {
     if(err) {
-      console.log(err)
+      console.log('error catch worked!',err)
       res.status(401).send(err);
     } else {
-      res.status(201).send(data);
+      res.status(201).send('success!');
     }
   });
 })
