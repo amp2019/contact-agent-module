@@ -16,12 +16,12 @@ const getAHomePgsql = (houseId, cb) => {
 }
 
 const newNote = (homeId, data, cb) => {
-    let houseId = homeId ? homeId : 1
-    let name = data.name ? data.name : null
+    let houseId = homeId ? homeId : data.houseId
+    let name = data.username ? data.username : null
     let email = data.email ? data.email : null
     let phone = data.phone ? data.phone : null
     let note = data.note ? data.note : null
-    pgsqlDb.any(`insert into messages (home,name,phone,email,note) values (${houseId},${name},${phone},${email},${note});`)
+    pgsqlDb.any(`insert into messages (houseId,name,phone,email,note) values (${houseId},'${name}','${phone}','${email}','${note}');`)
     .then((response) => {
         cb(null,response);
     })
@@ -29,29 +29,22 @@ const newNote = (homeId, data, cb) => {
 
 const updateHome = (homeId, data, cb) => {
     let houseId = homeId ? homeId : 1
-    if (data.agentId && data.address) {
-        pgsqlDb.any(`UPDATE homes set agent=${data.agentId},address=${data.address} where id=${houseId};`)
-        .then((response) => {
-            cb(null,response);
-        })
-    } else if (data.agentId) {
+    if (data.agentId) {
         pgsqlDb.any(`UPDATE homes set agent=${data.agentId} where id=${houseId};`)
         .then((response) => {
             cb(null,response);
         })
-    } else if (data.address) {
-        pgsqlDb.any(`UPDATE homes set address=${data.address} where id=${houseId};`)
-        .then((response) => {
-            cb(null,response);
-        })
+    } else {
+        cb('invalid request with agentId')
     }
 }
 
 const deleteHome = (homeId, cb) => {
-    pgsqlDb.any(`delete from homes where id=${homeId};`)
+    pgsqlDb.any(`delete from messages where houseId=${homeId};`)
+    .then(() => pgsqlDb.any(`delete from homes where id=${homeId};`)
     .then((response) => {
         cb(null,response);
-    })
+    }))
 }
 
 module.exports = { getAHomePgsql, newNote, updateHome, deleteHome };

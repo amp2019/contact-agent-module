@@ -10,28 +10,59 @@
 
 # API References 
 
-*formatting example*
+## Properties
 
-OPERATION (endpoint) [required fields] {other fields}
-  - example command 1
-  - example command 2
+The following table defines the properties used with the API
 
-CREATE (/newAgent) [name] {houseId, company, phone, url}
-  - ``curl -d '{"houseId":"150", "name":"Luke Lucas", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent``
-  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent``
+| Key           | Example Value  | Type    |
+| ------------- |:--------------:| -------:|
+| homeId        | 600613         | INT     |
+| address       | 242 cini rd.   | String  |
+| agents        | (nested obj)   | Object  |
+| agentId       | 81840          | INT     |
+| agentName     | Agent Smith    | String  |
+| premier       | True           | Boolean |
+| company       | Acme Inc       | String  |
+| reviews       | 10             | INT     |
+| recentSales   | 4              | INT     |
+| phone         | (555) 444 3333 | String  |
+| imgurl        | http://s3.com  | String  |
+| messages      | (nested obj)   | Object  |
+| username      | Mike           | String  |
+| email         | mike@g.co      | String  |
+| note          | I like house   | String  |
 
-READ (/:houseId) [name] {}
-  - ``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent``
-  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X GET http://localhost:8083/agent``
 
-UPDATE (/updateAgent) [name] {houseId, company, phone, url}
-  - ``curl -d '{"houseId":"151", "name":"Luke Lucas", "company":"NASA", "phone":"(555) 555-8844", "url":"www.spacex.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent``
-  - ``curl -d '{"name":"Raaandy", "houseId":"151"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent``
+## Request and Response Examples
 
-DELETE (/deleteAgent) [name] {}
-  - ``curl -d '{"name":"Luke Lucas"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent``
-  - ``curl -d '{"name":"Raaandy"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent``
+### Purpose
+#### OPERATION (endpoint) [required fields] {other fields}
 
+  - `example command 1`
+    - ```example response```
+
+### Post a request to talk with an agent about a listing
+#### CREATE (/api) [houseId] {username, email, phone, note}
+
+  - `curl -d '{"houseId":"150", "username":"Luke Lucas", "email":"hey@hey.com", "phone":"(484) 484-8844", "note":"I like the house. Can we talk?"}' -H "Content-Type: application/json" -X POST http://localhost:8083/api`
+    - ```success!```
+
+### Get address and agent information for a listed house
+#### READ (/api) [houseId] {}
+
+  - `curl -d '{"houseId":"150"}' -H "Content-Type: application/json" -X GET http://localhost:8083/api`
+    - ```[{"id":150,"address":"503 Dane Points","agent":4911,"name":"Retta Larson","premier":false,"company":"Conroy, Abernathy and Murray","imgurl":"https://s3.amazonaws.com/uifaces/faces/twitter/felipeapiress/128.jpg"}]```
+
+### Update the agent for a house listing
+#### UPDATE (/api) [houseId,agentId] {}
+
+  - `curl -d '{"houseId":"151", "agentId":"5"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/api`
+    - ```success!```
+
+#### DELETE (/api) [houseId] {}
+
+  - `curl -d '{"houseId":"151"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/api`
+    - ```success!```
 
 # INSTRUCTIONS TO SETUP RUNNING INSTANCE
 
@@ -46,24 +77,9 @@ DELETE (/deleteAgent) [name] {}
 7) load localhost:8082 in the browser
 
 
+Routes on roadmap
 
-NOTES for postgres routes
-
---KEEP IT SIMPLE (consider form on page first)
--- 1. GET: By homeId, return home address and listedAgent
-        -- POSTGRES: select * from homes,agents where homes.id={homeId} AND agents.id=homes.agent;
-        -- MONGO: 
 -- 1.1 GET: 3 random agents, with at least 5 sales
 -- 1.2 GET: By homeId, messages
-
--- 2. POST: By homeId, a new message
-        -- POSTGRES: insert into messages (home,name,phone,email,note) values ('');
-        -- MONGO:
--- 2.1 POST: New homeId and address and (optional agent)
-
--- 3. UPDATE: By homeId, a different listed agent id and/or address 
-        -- POSTGRES: update homes set agent=2,address='252 lunch rd' where id=1
-        -- MONGO: 
-
--- 4. DELETE: a home
-        -- POSTGRES: delete from homes where id=4
+-- 2.1 POST: New homeId and address and (optional agent, maybe autoassign)
+-- 4.1 DELETE: An agent by ID
