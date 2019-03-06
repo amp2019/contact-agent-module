@@ -32,6 +32,8 @@ CREATE TABLE messages (
   FOREIGN KEY (houseId) REFERENCES homes(id)
 );
 
+\timing
+
 COPY agents (name,premier,company,reviews,recentSales,phone,imgurl)
 FROM '/Users/Raaandy/Desktop/hackReactor/amp/contact-agent-module/database/seed/datafiles/agentsfile.csv'
 WITH (format csv, header)

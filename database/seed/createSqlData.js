@@ -66,6 +66,6 @@ let messagesFile = (d) => {
 
 console.time("3 CSV Creation");
 agentsFile(50000);
-messagesFile(10000);
-homesFile(10000);
+messagesFile(10000000);
+homesFile(10000000);
 console.timeEnd("3 CSV Creation");
