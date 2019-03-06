@@ -8,7 +8,6 @@ const getAHomePgsql = (houseId, cb) => {
         console.log('big iff hit')
         houseId = 1;
     }
-    console.log('pgdb',houseId)
     pgsqlDb.any(`select homes.id,homes.address,homes.agent,agents.name,agents.premier,agents.company,agents.imgurl from homes,agents where homes.id=${houseId} AND agents.id=homes.agent;`)
     .then((response) => {
         cb(null,response);

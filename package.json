@@ -1,5 +1,5 @@
 {
-  "name": "steve-component-agent-contact",
+  "name": "backend-update-agent-request-service",
   "version": "1.0.0",
   "description": "> Project description",
   "main": "server/index.js",
@@ -9,7 +9,7 @@
     "start": "nodemon ./server/index.js",
     "seedCsvs": "node database/seed/createSqldata.js",
     "seedJson": "node database/seed/createMongodata.js",
-    "seedMongo": "--db amp --collection homes --jsonArray < database/seed/datafiles/mongoHomes.JSON",
+    "seedMongo": "mongoimport --db amp --collection homes --jsonArray < database/seed/datafiles/mongoHomes.JSON",
     "seedPsql": "psql postgres < database/seed/psqlSeed.sql",
     "faker": "node ./database/fakeData.js"
   },
@@ -29,6 +29,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
+    "mongoose": "^5.4.17",
     "mysql": "^2.16.0",
     "path": "^0.12.7",
     "pg-promise": "^8.5.6",

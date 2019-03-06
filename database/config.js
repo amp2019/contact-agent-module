@@ -6,5 +6,6 @@ const mysqlConfig = {
 };
 
 const pgsqlConfig = 'postgres://student:student@localhost:5432/heyagent'
+const mongoConfig = 'mongodb://localhost/amp'
 
-module.exports = { mysqlConfig, pgsqlConfig };
+module.exports = { mysqlConfig, pgsqlConfig, mongoConfig };

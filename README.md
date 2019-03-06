@@ -67,9 +67,9 @@ READ (/api) [houseId] {}
 
 ### Update the agent for a house listing
 
-UPDATE (/api) [houseId,agentId] {}
+UPDATE (/api) [houseId] {agentName,premier,company,reviews,recentSales,phone,imgurl}
 
-  - `curl -d '{"houseId":"151", "agentId":"5"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/api`
+  - `curl -d '{"houseId":"151", "agentName":"Agent Smith", "premier":"true", "company":"MetaCortex", "phone":"(555) 555-5555", "imgurl":"https://s3.amazonaws.com/uifaces/faces/twitter/okandungel/128.jpg"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/api`
     
 ```
 success!
