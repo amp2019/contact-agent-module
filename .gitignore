@@ -34,4 +34,7 @@ data/config.js
 .env
 
 # datafiles / csv's
-database/seed/datafiles/
+database/seed/datafiles/mongoHomes.JSON
+database/seed/datafiles/agentsfile.csv
+database/seed/datafiles/homesfile.csv
+database/seed/datafiles/messagesfile.csv

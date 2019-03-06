@@ -1,0 +1,56 @@
+[{"homeId":"1","address":"242 cinnamin rd.","agent":{"agentname":"Mike","premier":"false","company":"Acme Inc","reviews":"3","recentSales":"2","phone":"555 555 5555","imgurl":"htps://amazon/as/asf/gt/asd/f/"},"messages":[{"username":"Raaandy","phone":"555 555 5555","email":"iamuser@g,co","note":"hipsum ippsum stink people milkshakes"},
+{"username":"Jamal","phone":"666 666 5555","email":"jamala@g,co","note":"cheeseburger ippsum stink people milkshakes"}]},
+{
+    "homeId":"1",
+    "address":"3412 dusty rd.",
+    "agent":{
+        "agentname":"Mike",
+        "premier":"false",
+        "company":"Castlight Inc",
+        "reviews":"3",
+        "recentSales":"2",
+        "phone":"555 555 5555",
+        "imgurl":"htps://amazon/as/asf/gt/asd/f/"
+    },
+    "messages":[
+        {
+            "username":"Raaandy",
+            "phone":"555 555 5555",
+            "email":"iamuser@g,co",
+            "note":"hipsum ippsum stink people milkshakes"
+        },
+        {
+            "username":"Jamal",
+            "phone":"666 666 5555",
+            "email":"jamala@g,co",
+            "note":"cheeseburger ippsum stink people milkshakes"
+        }
+    ]
+},
+{
+    "homeId":"3",
+    "address":"987 stoney dr.",
+    "agent":{
+        "agentname":"Evan",
+        "premier":"true",
+        "company":"PwC Inc",
+        "reviews":"3",
+        "recentSales":"2",
+        "phone":"555 555 5555",
+        "imgurl":"htps://amazon/as/asf/gt/asd/f/"
+    },
+    "messages":[
+        {
+            "username":"Raaandy",
+            "phone":"555 555 5555",
+            "email":"iamuser@g,co",
+            "note":"hipsum ippsum stink people milkshakes"
+        },
+        {
+            "username":"Jamal",
+            "phone":"666 666 5555",
+            "email":"jamala@g,co",
+            "note":"cheeseburger ippsum stink people milkshakes"
+        }
+    ]
+}]
