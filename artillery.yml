@@ -1,0 +1,32 @@
+config:
+  target: 'http://localhost:8083/api'
+  phases:
+    - duration: 5
+      arrivalRate: 2
+  # defaults:
+  #   headers:
+  #     x-my-service-auth: '987401838271002188298567'
+  payload:
+      # path is relative to the location of the test script
+      path: "database/seed/datafiles/OneKMessagesForArtillery.csv"
+      fields:
+        - "houseId" 
+        - "username"
+        - "phone"
+        - "email"
+        - "note"
+      skipHeader: true
+scenarios:
+  - flow:
+    - get:
+        url: "/"
+    - post:
+        url: "/"
+        # json: {"houseId":"random", "username":"Luke Lucas", "email":"hey@hey.com", "phone":"(484) 484-8844", "note":"I like the house. Can we talk?"}
+        json: 
+          houseId: "{{ houseId }}"
+          username: "{{ username }}"
+          phone: "{{ phone }}"
+          email: "{{ email }}"
+          note: "{{ note }}"
+      

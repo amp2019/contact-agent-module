@@ -24,6 +24,7 @@ app.use(function (req, res, next) {
 // to receive houseId, send houseId to db, and respond with house address and associated listedAgent info and 3 premier agents
 //app.get('/api/:houseId', (req,res) => {
 app.get('/api', (req,res) => {
+  console.log('get')
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -46,6 +47,7 @@ app.get('/api', (req,res) => {
 //create a new message - need houseId, username, email, phone, message
 //app.post('/api/:houseId', (req,res) => {
 app.post('/api', (req,res) => {
+  
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -53,6 +55,7 @@ app.post('/api', (req,res) => {
   if (req.body.houseId) {
     houseId = req.body.houseId;
   }
+  console.log('post homeid:', houseId)
   let cb = (err,data) => {
     if(err) {
       console.log('err in index.js express server file',err)

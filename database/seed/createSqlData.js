@@ -41,7 +41,7 @@ let homesFile = (d) => {
 
 let messagesFile = (d) => {
     //let headLine = 'messageId,houseId,name,phone,email,note,created \n';
-    let headLine = 'houseId,name,phone,email,note,created \n';
+    let headLine = 'houseId,username,phone,email,note,created \n';
     let b = d / 1000;
     let counter = 0
     let writeStream = fs.createWriteStream('database/seed/datafiles/messagesfile.csv', { flags : 'w' });
