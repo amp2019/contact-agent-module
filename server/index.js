@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -32,7 +33,7 @@ app.get('/api', (req,res) => {
   }
   let cb = (err,data) => {
     if(err) {
-      console.log(err)
+      console.log('err', err)
       res.status(401).send(err);
     } else {
       res.status(201).send(data);
@@ -48,11 +49,9 @@ app.post('/api', (req,res) => {
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
-    console.log('post params', houseId)
   }
   if (req.body.houseId) {
     houseId = req.body.houseId;
-    console.log('post body', houseId)
   }
   let cb = (err,data) => {
     if(err) {
@@ -77,7 +76,7 @@ app.patch('/api', (req,res) => {
   }
   let cb = (err,data) => {
     if(err) {
-      console.log(err)
+      console.log('err',err)
       res.status(401).send(err);
     } else {
       res.status(201).send('success!');
@@ -111,7 +110,7 @@ app.delete('/api', (req,res) => {
 app.get('/agent', (req,res) => {
   dbmysql.getAgent(req.body, (err,data) => {
     if(err) {
-      console.log(err)
+      console.log('err', err)
       res.status(401).send(err);
     } else {
       res.status(201).send(data);
@@ -122,7 +121,6 @@ app.get('/agent', (req,res) => {
 // renders new html for unique house data
 app.get('/:houseId', (req, res) => {
   // let houseId = req.params.houseId;
-
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
@@ -155,7 +153,7 @@ app.get('/houseId/premierAgents', (req, res) => {
 app.post('/newAgent', (req,res) => {
   dbmysql.createAgent(req.body, (err) => {
     if(err) {
-      console.log(err)
+      console.log('err', err)
       res.status(409).send(err);
     } else {
       res.status(201).send('success');

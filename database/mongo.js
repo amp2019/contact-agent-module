@@ -13,7 +13,7 @@ const vanillaFind = mongoose.model('basic',new mongoose.Schema({ _id: String}),'
 const getAHome = (id, cb) => {
     let houseId = id.toString();
     vanillaFind.find({"_id":houseId}, (err, data) => {
-        cb(data)
+        cb(null, data)
     })
 }
 
