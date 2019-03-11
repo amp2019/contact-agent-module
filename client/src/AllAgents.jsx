@@ -21,15 +21,16 @@ class AllAgents extends React.Component {
   componentDidMount() {
     let homeId = 99
     if (this.props.houseId) {
+      
       homeId = this.props.houseId;
     }
-    console.log(this.props.houseId)
-    axios.get(`/houseId/listedAgent/${homeId}`)
+    //props is passed down initially in the index.html, down to agentContact, which is equal to App,
+    axios.get(`http://localhost:8083/houseId/listedAgent/${homeId}`)
       .then(response => {
         const listAgent = response.data[0];
         this.setState({ lAgent: listAgent });
       });
-    axios.get(`/houseId/premierAgents`)
+    axios.get(`http://localhost:8083/houseId/premierAgents`)
       .then(response => {
         const preAgent0 = response.data[0];
         const preAgent1 = response.data[1];

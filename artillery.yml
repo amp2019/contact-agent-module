@@ -1,14 +1,14 @@
 config:
-  target: 'http://localhost:8083/api'
+  # target: 'http://localhost:8083/api'
+  target: 'http://localhost:9000/api'
   phases:
-    - duration: 5
-      arrivalRate: 2
+    - duration: 240
+      arrivalRate: 200
   # defaults:
   #   headers:
   #     x-my-service-auth: '987401838271002188298567'
   payload:
-      # path is relative to the location of the test script
-      path: "database/seed/datafiles/OneKMessagesForArtillery.csv"
+      path: "database/seed/datafiles/OneMillionMessages.csv"
       fields:
         - "houseId" 
         - "username"
@@ -17,16 +17,22 @@ config:
         - "note"
       skipHeader: true
 scenarios:
-  - flow:
-    - get:
-        url: "/"
-    - post:
-        url: "/"
-        # json: {"houseId":"random", "username":"Luke Lucas", "email":"hey@hey.com", "phone":"(484) 484-8844", "note":"I like the house. Can we talk?"}
-        json: 
-          houseId: "{{ houseId }}"
-          username: "{{ username }}"
-          phone: "{{ phone }}"
-          email: "{{ email }}"
-          note: "{{ note }}"
+  - name: "A user looking at a listing"
+    weight: 20
+    flow:
+      - get:
+          url: "/"
+          json: 
+            houseId: "{{ houseId }}"
+  - name: "A user posting a message for a listing agent"
+    weight: 1
+    flow:
+      - post:
+          url: "/"
+          json: 
+            houseId: "{{ houseId }}"
+            username: "{{ username }}"
+            phone: "{{ phone }}"
+            email: "{{ email }}"
+            note: "{{ note }}"
       

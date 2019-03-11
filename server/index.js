@@ -24,7 +24,6 @@ app.use(function (req, res, next) {
 // to receive houseId, send houseId to db, and respond with house address and associated listedAgent info and 3 premier agents
 //app.get('/api/:houseId', (req,res) => {
 app.get('/api', (req,res) => {
-  console.log('get')
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -32,12 +31,13 @@ app.get('/api', (req,res) => {
   if (req.body.houseId) {
     houseId = req.body.houseId;
   }
+  //console.log('get', houseId)
   let cb = (err,data) => {
     if(err) {
       console.log('err', err)
       res.status(401).send(err);
     } else {
-      res.status(201).send(data);
+      res.status(200).send(data);
     }
   } 
   //dbpgsql.getAHomePgsql(houseId, cb);
@@ -47,7 +47,6 @@ app.get('/api', (req,res) => {
 //create a new message - need houseId, username, email, phone, message
 //app.post('/api/:houseId', (req,res) => {
 app.post('/api', (req,res) => {
-  
   let houseId = 1;
   if (req.params.houseId) {
     houseId = req.params.houseId;
@@ -55,7 +54,7 @@ app.post('/api', (req,res) => {
   if (req.body.houseId) {
     houseId = req.body.houseId;
   }
-  console.log('post homeid:', houseId)
+  //console.log('post homeid:', houseId)
   let cb = (err,data) => {
     if(err) {
       console.log('err in index.js express server file',err)
@@ -101,7 +100,7 @@ app.delete('/api', (req,res) => {
     if(err) {
       res.status(401).send(err);
     } else {
-      res.status(201).send('success!');
+      res.status(202).send('success!');
     }
   }
   //dbpgsql.deleteHome(houseId,cb);

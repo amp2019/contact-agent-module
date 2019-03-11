@@ -24,7 +24,7 @@ const PremierAgent = ({ pAgents }) => {
           <Name>{pAgents.name}</Name>
           <ReviewContainer>
             <span className="starContainer">
-              <Stars src="https://s3.amazonaws.com/xillowstars/stars.png" ></Stars>
+              <Stars src="https://s3-us-west-2.amazonaws.com/amenities-photos/pillow/5-Star-Rating.png" ></Stars>
             </span>
             <span>(<a className="reviewColor">{pAgents.reviews}</a>)</span>
           </ReviewContainer>
