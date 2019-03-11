@@ -26,7 +26,7 @@ node_modules/
 jspm_packages/
 
 # Passwords
-data/config.js
+database/config.js
 newRelicKey.js
 
 # Optional npm cache directory
@@ -40,3 +40,4 @@ database/seed/datafiles/mongoHomes.JSON
 database/seed/datafiles/agentsfile.csv
 database/seed/datafiles/homesfile.csv
 database/seed/datafiles/messagesfile.csv
+database/seed/datafiles/oneMillionMessages.csv
