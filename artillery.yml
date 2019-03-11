@@ -1,14 +1,15 @@
 config:
   # target: 'http://localhost:8083/api'
-  target: 'http://localhost:9000/api'
+  # target: 'http://localhost:9000/api'
+  target: 'http://ec2-54-175-78-80.compute-1.amazonaws.com:8083/api'
   phases:
-    - duration: 240
-      arrivalRate: 200
+    - duration: 30
+      arrivalRate: 2
   # defaults:
   #   headers:
   #     x-my-service-auth: '987401838271002188298567'
   payload:
-      path: "database/seed/datafiles/OneMillionMessages.csv"
+      path: "database/seed/datafiles/oneMillionMessages.csv"
       fields:
         - "houseId" 
         - "username"
