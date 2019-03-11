@@ -2,9 +2,9 @@ require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const dbmysql = require('../database/mysql.js');
+//const dbmysql = require('../database/mysql.js');
 //ERROR POSSIBLE! Running mysql and pgsql at same time
-const dbpgsql = require('../database/pgsql.js');
+//const dbpgsql = require('../database/pgsql.js');
 const dbmongo = require('../database/mongo.js')
 
 
@@ -109,16 +109,16 @@ app.delete('/api', (req,res) => {
 
 
 //this .get has to stay above the 
-app.get('/agent', (req,res) => {
-  dbmysql.getAgent(req.body, (err,data) => {
-    if(err) {
-      console.log('err', err)
-      res.status(401).send(err);
-    } else {
-      res.status(201).send(data);
-    }
-  });
-})
+// app.get('/agent', (req,res) => {
+//   dbmysql.getAgent(req.body, (err,data) => {
+//     if(err) {
+//       console.log('err', err)
+//       res.status(401).send(err);
+//     } else {
+//       res.status(201).send(data);
+//     }
+//   });
+// })
 
 // renders new html for unique house data
 app.get('/:houseId', (req, res) => {
@@ -126,42 +126,42 @@ app.get('/:houseId', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
-app.get('/houseId/listedAgent/:houseId', (req, res) => {
-  let houseId = req.params.houseId;
-  dbmysql.getListedAgent(houseId, (err, data) => {
-    if (err) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+// app.get('/houseId/listedAgent/:houseId', (req, res) => {
+//   let houseId = req.params.houseId;
+//   dbmysql.getListedAgent(houseId, (err, data) => {
+//     if (err) {
+//       res.sendStatus(404);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
 
-app.get('/houseId/premierAgents', (req, res) => {
-  dbmysql.getPremierAgents((err, data) => {
-    if (err) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+// app.get('/houseId/premierAgents', (req, res) => {
+//   dbmysql.getPremierAgents((err, data) => {
+//     if (err) {
+//       res.sendStatus(404);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
 
 //crud
 
 //create
 //curl -d '{"houseId":"150", "name":"Chaaandy", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
 //curl -d '{"name":"Monroe Walsh", "company":"Galvanize", "phone":"(484) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X POST http://localhost:8083/newAgent
-app.post('/newAgent', (req,res) => {
-  dbmysql.createAgent(req.body, (err) => {
-    if(err) {
-      console.log('err', err)
-      res.status(409).send(err);
-    } else {
-      res.status(201).send('success');
-    }
-  });
-})
+// app.post('/newAgent', (req,res) => {
+//   dbmysql.createAgent(req.body, (err) => {
+//     if(err) {
+//       console.log('err', err)
+//       res.status(409).send(err);
+//     } else {
+//       res.status(201).send('success');
+//     }
+//   });
+// })
 
 //read - see above
 
@@ -170,29 +170,29 @@ app.post('/newAgent', (req,res) => {
 //curl -d '{"houseId":"153", "name":"Raaandy", "company":"Hack Reactor", "phone":"(555) 484-8844", "url":"www.rickroll.com"}' -H "Content-Type: application/json" -X PATCH http://localhost:8083/updateAgent
 
 
-app.patch('/updateAgent', (req,res) => {  
-  dbmysql.updateAgent(req.body, (err) => {
-    if(err) {
-      res.status(404).send(err);
-    } else {
-      res.status(201).send('success');
-    }
-  });
-})
+// app.patch('/updateAgent', (req,res) => {  
+//   dbmysql.updateAgent(req.body, (err) => {
+//     if(err) {
+//       res.status(404).send(err);
+//     } else {
+//       res.status(201).send('success');
+//     }
+//   });
+// })
 
 //delete
 //curl -d '{"houseId":"149"}' -H "Content-Type: application/json" -X DELETE http://localhost:8083/deleteAgent
 
 
-app.delete('/deleteAgent', (req,res) => {
-  dbmysql.deleteAgent(req.body, (err) => {
-    if(err) {
-      res.status(404).send(err);
-    } else {
-      res.status(201).send('success');
-    }
-  });
-})
+// app.delete('/deleteAgent', (req,res) => {
+//   dbmysql.deleteAgent(req.body, (err) => {
+//     if(err) {
+//       res.status(404).send(err);
+//     } else {
+//       res.status(201).send('success');
+//     }
+//   });
+// })
 
 app.listen(PORT, () => {
   console.log(`Hidey-Ho Cap'n, we are now serving on port ${PORT}!`);
