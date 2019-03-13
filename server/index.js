@@ -126,16 +126,26 @@ app.get('/:houseId', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
-// app.get('/houseId/listedAgent/:houseId', (req, res) => {
-//   let houseId = req.params.houseId;
-//   dbmysql.getListedAgent(houseId, (err, data) => {
-//     if (err) {
-//       res.sendStatus(404);
-//     } else {
-//       res.status(200).send(data);
-//     }
-//   });
-// });
+app.get('/houseId/listedAgent/:houseId', (req, res) => {
+    let houseId = 1;
+    if (req.params.houseId) {
+      houseId = req.params.houseId;
+    }
+    if (req.body.houseId) {
+      houseId = req.body.houseId;
+    }
+    //console.log('get', houseId)
+    let cb = (err,data) => {
+      if(err) {
+        console.log('err', err)
+        res.status(401).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    } 
+    dbmongo.getAnAgent(houseId, cb);
+    //dbmongo.getThreePremiers((data)=>console.log(data));
+  });
 
 // app.get('/houseId/premierAgents', (req, res) => {
 //   dbmysql.getPremierAgents((err, data) => {

@@ -10,9 +10,9 @@ db.once('open', () => console.log('Mongo is open for business'))
 const vanillaFind = mongoose.model('basic',new mongoose.Schema({ _id: String}),'homes'); 
 
 //function for gets
-const getAHome = (id, cb) => {
+const getAnAgent = (id, cb) => {
     let houseId = id.toString();
-    //probably need to increase the poolSize to 100 from default=5 at the connection
+    //may need to increase the poolSize to 100 from default=5 at the connection
     //vanillaFind.find({"_id":houseId}, (err, data) => {
     vanillaFind.findById(houseId, 'agent', { lean: true }, (err, data) => {
         cb(null, data)
@@ -25,7 +25,7 @@ const homeListingSchema = new mongoose.Schema({
     address: String,
     agent:{
         agentname:String,
-        premier:Boolean,
+        premier:String,
         company:String, 
         reviews:Number,
         recentSales:Number,
@@ -44,6 +44,25 @@ const homeListingSchema = new mongoose.Schema({
 const homeListing = mongoose.model('homeListing',homeListingSchema,'homes')
 
 //function for posts
+
+const listingAgentAndPremier = (id,cb) => {
+    let houseId = id.toString();
+    homeListing.findById(houseId, 'agent', { lean: true }, (err, data) => {
+        cb(null, data)
+    })
+    //possible to run listedAgent and premierAgent query in same query or function? 
+}
+
+const getThreePremiers = (cb) => {
+    //this query below is super slow
+    let skipRand = 1 + Math.floor(Math.random()*999)
+    homeListing.find({"agent.premier":"true"}, 'agent', { limit:3,skip:skipRand }, (err, data) => {
+        cb(null, data)
+    })
+    //use the skip to randomize agents returned
+    //use the limit to only get top 3 results
+}
+
 const newNote = (homeId,data,callback) => {
     let houseId = homeId ? homeId.toString() : data.houseId.toString()
     let name = data.username ? data.username : null
@@ -94,4 +113,4 @@ const deleteHome = (homeId, cb) => {
     })
 }
 
-module.exports = { getAHome, newNote, updateHome, deleteHome };
+module.exports = { getAnAgent, newNote, updateHome, deleteHome, getThreePremiers };
