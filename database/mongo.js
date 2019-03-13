@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require('./config.js');
 
 mongoose.connect(config.mongoConfig, { useNewUrlParser: true });
+//mongoose.connect(config.awsMongoConfig, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
