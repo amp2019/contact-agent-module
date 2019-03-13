@@ -19,7 +19,7 @@ const ListedAgent = ({ lAgent }) => {
     <AgentContainer>
       <div className="left">
         <Radio type="radio"></Radio>
-        <Avatar src={lAgent.url}></Avatar>
+        <Avatar src={lAgent.imgurl}></Avatar>
         <Infobox>
           <Name>{lAgent.name}</Name>
           <ReviewContainer>

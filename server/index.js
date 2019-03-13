@@ -21,6 +21,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/loaderio-9dbb7c2c6e2d601fc2a360309504ad7a/', (req,res) => {
+  res.send('loaderio-9dbb7c2c6e2d601fc2a360309504ad7a')
+});
+
 // to receive houseId, send houseId to db, and respond with house address and associated listedAgent info and 3 premier agents
 //app.get('/api/:houseId', (req,res) => {
 app.get('/api', (req,res) => {
@@ -126,16 +130,26 @@ app.get('/:houseId', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
-// app.get('/houseId/listedAgent/:houseId', (req, res) => {
-//   let houseId = req.params.houseId;
-//   dbmysql.getListedAgent(houseId, (err, data) => {
-//     if (err) {
-//       res.sendStatus(404);
-//     } else {
-//       res.status(200).send(data);
-//     }
-//   });
-// });
+app.get('/houseId/listedAgent/:houseId', (req, res) => {
+    let houseId = 1;
+    if (req.params.houseId) {
+      houseId = req.params.houseId;
+    }
+    if (req.body.houseId) {
+      houseId = req.body.houseId;
+    }
+    //console.log('get', houseId)
+    let cb = (err,data) => {
+      if(err) {
+        console.log('err', err)
+        res.status(401).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    } 
+    dbmongo.getAnAgent(houseId, cb);
+    //dbmongo.getThreePremiers((data)=>console.log(data));
+  });
 
 // app.get('/houseId/premierAgents', (req, res) => {
 //   dbmysql.getPremierAgents((err, data) => {

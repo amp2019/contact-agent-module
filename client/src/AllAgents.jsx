@@ -27,7 +27,8 @@ class AllAgents extends React.Component {
     //props is passed down initially in the index.html, down to agentContact, which is equal to App,
     axios.get(`http://localhost:8083/houseId/listedAgent/${homeId}`)
       .then(response => {
-        const listAgent = response.data[0];
+        const listAgent = response.data.agent;
+        //console.log(listAgent)
         this.setState({ lAgent: listAgent });
       });
     axios.get(`http://localhost:8083/houseId/premierAgents`)
