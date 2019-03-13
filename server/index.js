@@ -21,6 +21,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/loaderio-9dbb7c2c6e2d601fc2a360309504ad7a/', (req,res) => {
+  res.send('loaderio-9dbb7c2c6e2d601fc2a360309504ad7a')
+});
+
 // to receive houseId, send houseId to db, and respond with house address and associated listedAgent info and 3 premier agents
 //app.get('/api/:houseId', (req,res) => {
 app.get('/api', (req,res) => {
