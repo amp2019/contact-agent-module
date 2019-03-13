@@ -59,7 +59,7 @@ let messagesFile = (d) => {
             //lines += (i+counter) + "," + (1+faker.random.number(d-2)) + "," + faker.name.findName() + "," + faker.phone.phoneNumberFormat(1) + "," + faker.internet.email() + "," + hipsumArray.slice(hipRand,hipRand+10).join(' ') + "," + dateTime + '\n'
             lines += (1+faker.random.number(9999999)) + "," + faker.name.findName() + "," + faker.phone.phoneNumberFormat(1) + "," + faker.internet.email() + "," + hipsumArray.slice(hipRand,hipRand+10).join(' ') + "," + dateTime + '\n'
         }
-        counter += 1000;
+        //counter += 1000;
         writeStream.write(lines)
     }
 }

@@ -41,3 +41,5 @@ database/seed/datafiles/agentsfile.csv
 database/seed/datafiles/homesfile.csv
 database/seed/datafiles/messagesfile.csv
 database/seed/datafiles/oneMillionMessages.csv
+database/seed/datafiles/loaderGetData.JSON
+database/seed/datafiles/loaderPostData.JSON
