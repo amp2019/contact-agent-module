@@ -1,10 +1,11 @@
 config:
-  # target: 'http://localhost:8083/api'
+  target: 'http://localhost:8083/api'
   # target: 'http://localhost:9000/api'
-  target: 'http://ec2-54-175-78-80.compute-1.amazonaws.com:8083/api'
+  # CAREFUL about this from hack reactor IP address, it will get blocked
+  # target: 'http://ec2-54-175-78-80.compute-1.amazonaws.com:8083/api'
   phases:
-    - duration: 30
-      arrivalRate: 2
+    - duration: 240
+      arrivalRate: 200
   # defaults:
   #   headers:
   #     x-my-service-auth: '987401838271002188298567'

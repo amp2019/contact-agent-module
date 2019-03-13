@@ -12,7 +12,9 @@ const vanillaFind = mongoose.model('basic',new mongoose.Schema({ _id: String}),'
 //function for gets
 const getAHome = (id, cb) => {
     let houseId = id.toString();
-    vanillaFind.find({"_id":houseId}, (err, data) => {
+    //probably need to increase the poolSize to 100 from default=5 at the connection
+    //vanillaFind.find({"_id":houseId}, (err, data) => {
+    vanillaFind.findById(houseId, 'agent', { lean: true }, (err, data) => {
         cb(null, data)
     })
 }
