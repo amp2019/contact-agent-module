@@ -45,7 +45,7 @@ app.get('/api', (req,res) => {
     }
   } 
   //dbpgsql.getAHomePgsql(houseId, cb);
-  dbmongo.getAHome(houseId, cb);
+  dbmongo.getAnAgent(houseId, cb);
 })
 
 //create a new message - need houseId, username, email, phone, message
